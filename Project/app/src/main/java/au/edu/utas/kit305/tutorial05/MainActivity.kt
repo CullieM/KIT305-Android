@@ -76,6 +76,11 @@ class MainActivity : AppCompatActivity()
                 }
                 ui.lblMovieCount.text = "${items.size} Movies"
             }
+        ui.activity2button.text = "Activity 2"
+        ui.activity2button.setOnClickListener {
+            val intent = Intent(this, MainActivity2::class.java)
+            startActivity(intent)
+        }
     }
 
 
