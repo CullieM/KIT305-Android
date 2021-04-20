@@ -9,8 +9,8 @@ import au.edu.utas.kit305.tutorial05.StudentFragment
 import au.edu.utas.kit305.tutorial05.WeeksFragment
 
 private val TAB_TITLES= arrayOf(
-    R.string.tab_text_1,
-    R.string.tab_text_2
+    "Students",
+    "Weeks"
 )
 /**
  * A [FragmentPagerAdapter] that returns a fragment corresponding to
@@ -31,7 +31,7 @@ class SectionsPagerAdapter(private val context: Context, fm: FragmentManager) :
     }
 
     override fun getPageTitle(position: Int): CharSequence? {
-        return context.resources.getString(TAB_TITLES[position])
+        return TAB_TITLES[position]
     }
 
     override fun getCount(): Int {

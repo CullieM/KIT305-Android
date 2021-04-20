@@ -37,26 +37,6 @@ class MainActivity : AppCompatActivity()
         //vertical list
         ui.myList.layoutManager = LinearLayoutManager(this)
         val db = Firebase.firestore
-
-        /*
-        val lotr = Movie(
-            title = "Lord of the Rings: Fellowship of the Ring",
-            year = 2001,
-            duration = 9001F
-        )
-
-        moviesCollection
-            .add(lotr)
-            .addOnSuccessListener {
-                Log.d(FIREBASE_TAG, "Document created with id ${it.id}")
-                lotr.id = it.id
-            }
-            .addOnFailureListener {
-                Log.e(FIREBASE_TAG, "Error writing document", it)
-            }
-
-         */
-        //get all movies
         var moviesCollection = db.collection("movies")
 
         ui.lblMovieCount.text = "Loading..."
