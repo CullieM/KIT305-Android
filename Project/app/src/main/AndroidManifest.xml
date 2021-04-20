@@ -9,14 +9,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Tutorial04_Final">
+        <activity android:name=".StudentActivity"></activity>
         <activity
             android:name=".MainActivity2"
             android:label="@string/title_activity_main2"
-            android:theme="@style/Theme.Tutorial04_Final.NoActionBar"></activity>
+            android:theme="@style/Theme.Tutorial04_Final.NoActionBar" />
         <activity android:name=".MovieDetails" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

@@ -1,6 +1,7 @@
 package au.edu.utas.kit305.tutorial05
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,16 +13,19 @@ import au.edu.utas.kit305.tutorial05.databinding.FragmentWeeksBinding
 import au.edu.utas.kit305.tutorial05.databinding.StudentListItemBinding
 import au.edu.utas.kit305.tutorial05.databinding.WeekListItemBinding
 import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 
-class WeeksFragment : Fragment() {
-    val weeks = mutableListOf<Week>(
+class WeeksListFragment : Fragment() {
+    val weeks = mutableListOf<Week>()
+    /*
         Week(number = 1, marking_type = "Checkpoint"),
         Week(number = 2, marking_type = "Checkpoint"),
         Week(number = 3, marking_type = "Checkpoint"),
         Week(number = 4, marking_type = "Checkpoint"),
         Week(number = 5, marking_type = "Checkpoint")
     )
+     */
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -32,6 +36,20 @@ class WeeksFragment : Fragment() {
         //db setup
         val db = Firebase.firestore
         var weeksCollection = db.collection("weeks")
+        weeksCollection
+            .get()
+            .addOnSuccessListener { result ->
+                Log.d(FIREBASE_TAG, "--- all weeks ---")
+                for (document in result)
+                {
+                    //Log.d(FIREBASE_TAG, document.toString())
+                    val student = document.toObject<Week>()
+                    Log.d(FIREBASE_TAG, student.toString())
+
+                    weeks.add(student)
+                    (inflatedView.myList.adapter as WeeksListFragment.WeekAdapter).notifyDataSetChanged()
+                }
+            }
 
 
         inflatedView.myList.adapter = WeekAdapter(weeks)
