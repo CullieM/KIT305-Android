@@ -15,46 +15,53 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 
+const val STUDENT_INDEX = "Student_Index"
+var students = mutableListOf<Student>()
+
 class StudentListFragment : Fragment() {
-    val students = mutableListOf<Student>()
-    /*
-        Student(full_name = "Yasir Griffiths", student_id = "000001", overall_mark = 100),
-        Student(full_name = "Stuart Calhoun", student_id = "000002", overall_mark = 100),
-        Student(full_name = "Sonny Parsons", student_id = "000003", overall_mark = 100),
-        Student(full_name = "Dannielle Dowling", student_id = "000004", overall_mark = 100),
-        Student(full_name = "Anjali Seymour", student_id = "000005", overall_mark = 100)
-    )
-     */
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        var inflatedView = FragmentStudentBinding.inflate(layoutInflater, container, false)
+    private lateinit var inflatedView : FragmentStudentBinding
+    override fun onResume() {
+        super.onResume()
+
+        inflatedView.myList.adapter?.notifyDataSetChanged()
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        //add new student button
+        //TODO THIS IS BROKEN
 
         //db setup
         val db = Firebase.firestore
         var studentsCollection = db.collection("students")
         studentsCollection
-            .get()
-            .addOnSuccessListener { result ->
-                Log.d(FIREBASE_TAG, "--- all students ---")
-                for (document in result)
-                {
-                    //Log.d(FIREBASE_TAG, document.toString())
-                    val student = document.toObject<Student>()
-                    Log.d(FIREBASE_TAG, student.toString())
-
-                    students.add(student)
-                    (inflatedView.myList.adapter as StudentListFragment.StudentAdapter).notifyDataSetChanged()
+                .get()
+                .addOnSuccessListener { result ->
+                    Log.d(FIREBASE_TAG, "--- all students ---")
+                    for (document in result)
+                    {
+                        //Log.d(FIREBASE_TAG, document.toString())
+                        val student = document.toObject<Student>()
+                        Log.d(FIREBASE_TAG, student.toString())
+                        students.add(student)
+                        (inflatedView.myList.adapter as StudentListFragment.StudentAdapter).notifyDataSetChanged()
+                    }
+                    students.sortBy{ it.student_id?.toInt() }
                 }
-            }
 
-        inflatedView.myList.adapter = StudentAdapter(students)
-        inflatedView.myList.layoutManager = LinearLayoutManager(context!!)
-        return inflatedView.root
     }
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        inflatedView = FragmentStudentBinding.inflate(layoutInflater, container, false)
+        inflatedView.myList.adapter = StudentAdapter(students)
+        inflatedView.myList.layoutManager = LinearLayoutManager(this.activity)
+        return inflatedView.root
 
+
+    }
     inner class StudentHolder(var ui: StudentListItemBinding) : RecyclerView.ViewHolder(ui.root) {}
 
     inner class StudentAdapter(private val students: MutableList<Student>) : RecyclerView.Adapter<StudentHolder>() {
@@ -70,18 +77,16 @@ class StudentListFragment : Fragment() {
         //Populates each row
         override fun onBindViewHolder(holder: StudentHolder, position: Int) {
             val student = students[position]
-            holder.ui.txtName.text = student.full_name
+            holder.ui.txtName.text = student.full_name + ","
             holder.ui.txtStudentID.text = student.student_id
             holder.ui.txtOverallMark.text = student.overall_mark.toString()
 
-            /*
             holder.ui.root.setOnClickListener {
-                var i = Intent(holder.ui.root.context, ::class.java)
-                i.putExtra(MOVIE_INDEX, position)
+                var i = Intent(holder.ui.root.context, StudentActivity::class.java)
+                i.putExtra(STUDENT_INDEX, position)
                 startActivity(i)
-
             }
-            */
         }
     }
+
 }
