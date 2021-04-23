@@ -65,8 +65,6 @@ class StudentActivity : AppCompatActivity() {
             // Handle any errors
         }
 
-
-
         //Pre-fill the TextViews
         ui.average.text = AVG
         ui.txtStudentName.text = studentObject.full_name
@@ -79,6 +77,7 @@ class StudentActivity : AppCompatActivity() {
             i.putExtra(STUDENT_INDEX, studentID)
             startActivityForResult(i, LAUNCH_SECOND_ACTIVITY)
         }
+        //Share in plain text button
         ui.btnShare.setOnClickListener {
             var sendIntent = Intent().apply {
                 action = Intent.ACTION_SEND

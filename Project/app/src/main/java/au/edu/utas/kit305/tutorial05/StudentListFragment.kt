@@ -16,16 +16,30 @@ import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 
 const val STUDENT_INDEX = "Student_Index"
+const val ADD_STUDENT_CODE = 19
 var students = mutableListOf<Student>()
 
+private lateinit var inflatedView : FragmentStudentBinding
+private lateinit var ui : FragmentStudentBinding
+
 class StudentListFragment : Fragment() {
-    private lateinit var inflatedView : FragmentStudentBinding
+
+
     override fun onResume() {
         super.onResume()
 
         inflatedView.myList.adapter?.notifyDataSetChanged()
     }
-
+    override fun onCreateView(
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
+    ): View? {
+        inflatedView = FragmentStudentBinding.inflate(layoutInflater, container, false)
+        inflatedView.myList.adapter = StudentAdapter(students)
+        inflatedView.myList.layoutManager = LinearLayoutManager(this.activity)
+        return inflatedView.root
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //add new student button
@@ -48,20 +62,8 @@ class StudentListFragment : Fragment() {
                     }
                     students.sortBy{ it.student_id?.toInt() }
                 }
-
     }
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        inflatedView = FragmentStudentBinding.inflate(layoutInflater, container, false)
-        inflatedView.myList.adapter = StudentAdapter(students)
-        inflatedView.myList.layoutManager = LinearLayoutManager(this.activity)
-        return inflatedView.root
 
-
-    }
     inner class StudentHolder(var ui: StudentListItemBinding) : RecyclerView.ViewHolder(ui.root) {}
 
     inner class StudentAdapter(private val students: MutableList<Student>) : RecyclerView.Adapter<StudentHolder>() {

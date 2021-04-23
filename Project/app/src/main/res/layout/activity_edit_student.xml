@@ -36,7 +36,7 @@
         android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@android:drawable/btn_star" />
+        app:srcCompat="@android:drawable/ic_menu_save" />
 
     <TextView
         android:id="@+id/txtOverallMark"

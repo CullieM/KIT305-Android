@@ -21,9 +21,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Tutorial04_Final">
         <activity
+            android:name=".MainActivity3"
+            android:label="@string/title_activity_main3"
+            android:theme="@style/Theme.Tutorial04_Final.NoActionBar"></activity>
+        <activity
             android:name=".WeekActivity"
             android:label="@string/title_activity_week"
-            android:theme="@style/Theme.Tutorial04_Final.NoActionBar"></activity>
+            android:theme="@style/Theme.Tutorial04_Final.NoActionBar" />
         <activity android:name=".AddStudentActivity" />
         <activity
             android:name=".EditStudentActivity"

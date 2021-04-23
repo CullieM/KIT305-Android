@@ -1,5 +1,6 @@
 package au.edu.utas.kit305.tutorial05
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.ViewGroup
@@ -42,6 +43,26 @@ class WeekActivity : AppCompatActivity() {
             }
         ui.myList.adapter = MarkAdapter(weekMarks)
         ui.myList.layoutManager = LinearLayoutManager(this)
+
+        //Share in plain text button
+        ui.btnShare.setOnClickListener {
+            var sendIntent = Intent().apply {
+                action = Intent.ACTION_SEND
+                var textToShare = "Week " + weeks[weekIndex].number + "\n\n"
+                for(i in 0 until weekMarks.size) {
+                    val mark = weekMarks[i]
+                    var filteredList: List<Student> = students.filter { it.id == mark.id }
+                    if (filteredList.isNotEmpty()){
+                        var name = filteredList[0].full_name.toString()
+                        textToShare += name+ "\n"
+                        textToShare += "Mark:" + weekMarks[i].mark + "\n\n"
+                    }
+                }
+                putExtra(Intent.EXTRA_TEXT, textToShare)
+                type = "text/plain"}
+            startActivity(Intent.createChooser(sendIntent, "Share via..."))
+
+        }
     }
     inner class MarkHolder(var listViewUI: WeekListItemBinding) : RecyclerView.ViewHolder(listViewUI.root) {}
     inner class MarkAdapter(private val weekMarks: MutableList<Mark>) : RecyclerView.Adapter<WeekActivity.MarkHolder>() {
@@ -65,10 +86,8 @@ class WeekActivity : AppCompatActivity() {
             }else{
                 name = "Deleted Student"
             }
-
             holder.listViewUI.txtNumber.text = name
             holder.listViewUI.txtMarkingType.text = mark.mark
-
         }
     }
 }
