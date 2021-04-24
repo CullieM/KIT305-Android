@@ -36,7 +36,7 @@
             android:theme="@style/Theme.Tutorial04_Final.NoActionBar" />
         <activity android:name=".StudentActivity" />
         <activity
-            android:name=".MainActivity2"
+            android:name=".TabbedActivity"
             android:label="@string/title_activity_main2"
             android:theme="@style/Theme.Tutorial04_Final.NoActionBar">
             <intent-filter>

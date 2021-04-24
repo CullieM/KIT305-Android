@@ -9,15 +9,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import au.edu.utas.kit305.tutorial05.databinding.FragmentStudentBinding
+import au.edu.utas.kit305.tutorial05.classes.Week
 import au.edu.utas.kit305.tutorial05.databinding.FragmentWeeksBinding
-import au.edu.utas.kit305.tutorial05.databinding.StudentListItemBinding
 import au.edu.utas.kit305.tutorial05.databinding.WeekListItemBinding
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
-val weeks = mutableListOf<Week>()
-const val WEEK_INDEX = "Week_Index"
+
 class WeeksListFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,7 +43,7 @@ class WeeksListFragment : Fragment() {
                 weeks.sortBy { it.number }
             }
         inflatedView.myList.adapter = WeekAdapter(weeks)
-        inflatedView.myList.layoutManager = LinearLayoutManager(context!!)
+        inflatedView.myList.layoutManager = LinearLayoutManager(this.activity)
         return inflatedView.root
     }
 

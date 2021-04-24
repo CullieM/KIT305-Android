@@ -1,17 +1,14 @@
 package au.edu.utas.kit305.tutorial05
 
-import android.R.*
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import au.edu.utas.kit305.tutorial05.classes.Mark
+import au.edu.utas.kit305.tutorial05.classes.Student
 import au.edu.utas.kit305.tutorial05.databinding.ActivityWeekBinding
 import au.edu.utas.kit305.tutorial05.databinding.WeekListItemBinding
 import com.google.firebase.firestore.ktx.firestore
@@ -54,7 +51,7 @@ class WeekActivity : AppCompatActivity() {
         ui.myList.adapter = MarkAdapter(weekMarks)
         ui.myList.layoutManager = LinearLayoutManager(this)
 
-        //TODO Marking types
+        //TODO Change mark display based on marking_type
         ui.txtMarkingType.text = weekObject.marking_type
         ui.txtClassAverageHeading.text = "Average"
 
@@ -98,7 +95,7 @@ class WeekActivity : AppCompatActivity() {
         //Populates each row
         override fun onBindViewHolder(holder: WeekActivity.MarkHolder, position: Int) {
             val mark = weekMarks[position]
-            var name: String = ""
+            var name: String
             var filteredList: List<Student> = students.filter { it.id == mark.id }
 
             if (filteredList.isNotEmpty()){
@@ -107,10 +104,8 @@ class WeekActivity : AppCompatActivity() {
                 name = "Deleted Student"
             }
             holder.listViewUI.txtNumber.text = name
-
             holder.listViewUI.txtMarkingType.text = mark.mark
-            //TODO Change mark style based on spinner
-            //if(weeks[weekIndex].id == "")
+            //TODO Change mark display based on marking_type
         }
     }
 }

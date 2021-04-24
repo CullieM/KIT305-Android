@@ -6,7 +6,6 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import au.edu.utas.kit305.tutorial05.databinding.ActivityEditWeekBinding
-import au.edu.utas.kit305.tutorial05.databinding.ActivityMainBinding
 
 class EditWeekActivity : AppCompatActivity() {
     private lateinit var ui : ActivityEditWeekBinding
@@ -29,7 +28,6 @@ class EditWeekActivity : AppCompatActivity() {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
                 // Display the selected item text on text view
                 //ui.txtMarkingType.text = "Spinner selected : ${parent.getItemAtPosition(position).toString()}"
-
             }
             override fun onNothingSelected(parent: AdapterView<*>) {
                 // Another interface callback
