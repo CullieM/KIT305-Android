@@ -6,7 +6,8 @@ import android.os.Parcelable
 class Week (
         var id : String? = null,
         var number : Int? = null,
-        var marking_type : String? = null
+        var marking_type : String? = null,
+        var overall_mark : Int? = null
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
             parcel.readString(),

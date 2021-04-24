@@ -48,9 +48,8 @@ class WeekActivity : AppCompatActivity() {
                         (ui.myList.adapter as MarkAdapter).notifyDataSetChanged()
                     }
                     calculateMean /= weekMarks.size
-                    var filteredMark: String = ""
                     val funClass = TabbedActivity()
-                    ui.txtClassAverage.text = funClass.calculateMark(weekObject?.marking_type!!,calculateMean)
+                    ui.txtClassAverage.text = funClass.calculateMark(weekObject.marking_type!!,calculateMean)
                 }
         ui.myList.adapter = MarkAdapter(weekMarks)
         ui.myList.layoutManager = LinearLayoutManager(this)
@@ -61,17 +60,18 @@ class WeekActivity : AppCompatActivity() {
 
         //Share in plain text button
         ui.btnShare.setOnClickListener {
+            val funClass = TabbedActivity()
             var sendIntent = Intent().apply {
                 action = Intent.ACTION_SEND
                 var textToShare = "Week " + weeks[weekIndex].number + "\n"
-                textToShare += "Class Average: $calculateMean\n\n"
+                textToShare += "Class Average: " + funClass.calculateMark(weeks[weekIndex].marking_type.toString(),calculateMean) + "\n\n"
                 for (i in 0 until weekMarks.size) {
                     val mark = weekMarks[i]
                     var filteredList: List<Student> = students.filter { it.id == mark.id }
                     if (filteredList.isNotEmpty()) {
                         val name = filteredList[0].full_name.toString()
-                        textToShare += name + "\n"
-                        textToShare += "Mark:" + weekMarks[i].mark + "\n\n"
+                        textToShare += "$name"
+                        textToShare += ": " + funClass.calculateMark(weeks[weekIndex].marking_type.toString(),weekMarks[i].mark?.toInt()!!) + "\n\n"
                     }
                 }
                 putExtra(Intent.EXTRA_TEXT, textToShare)
@@ -96,11 +96,9 @@ class WeekActivity : AppCompatActivity() {
             ui.txtMarkingType.text = weeks[weekID].marking_type.toString()
             ui.myList.adapter?.notifyDataSetChanged()
 
-
             val funClass = TabbedActivity()
-            ui.txtClassAverage.text = funClass.calculateMark(weeks[weekID].marking_type.toString(),calculateMean)
+            ui.txtClassAverage.text = funClass.calculateMark(weeks[weekID].marking_type.toString(),weeks[weekID].overall_mark?.toInt()!!)
 
-            //TODO GET Rid of this Log.d(FIREBASE_TAG, funClass.calculateMark(weeks[weekID].marking_type.toString(),calculateMean))
         } else {
             super.onActivityResult(requestCode, resultCode, data)
         }
@@ -132,37 +130,8 @@ class WeekActivity : AppCompatActivity() {
                 name = "Deleted Student"
             }
             holder.listViewUI.txtNumber.text = name
-            //var filteredMark: String = ""
             val funClass = TabbedActivity()
             holder.listViewUI.txtMarkingType.text = funClass.calculateMark(filteredWeekList[0].marking_type.toString(), mark.mark?.toInt()!!)
-            /*
-            when (filteredWeekList[0].marking_type) {
-                "Percentage" -> {
-                    filteredMark = mark.mark + "%"
-                }
-                "HD/DN/CR/PP/NN" -> {
-                    filteredMark = when(mark.mark?.toInt()){
-                        100 -> "HD+"
-                        in 80..99 -> "HD"
-                        in 70..79 -> "DN"
-                        in 60..69 -> "CR"
-                        in 50..59 -> "PP"
-                        else -> "NN"
-                    }
-                }
-                "A/B/C/D/F" -> {
-                    filteredMark = when(mark.mark?.toInt()) {
-                        100 -> "A"
-                        in 80..99 -> "B"
-                        in 70..79 -> "C"
-                        in 60..69 -> "D"
-                        else -> "F"
-                    }
-                }
-            }
-            holder.listViewUI.txtMarkingType.text = filteredMark
-            */
-            //TODO Change mark display based on marking_type
         }
     }
 }

@@ -30,26 +30,18 @@
   <component name="ChangeListManager">
     <list default="true" id="4493afd4-64b0-4e6d-baad-f9ef9084e319" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/au/edu/utas/kit305/tutorial05/EditStudentActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/au/edu/utas/kit305/tutorial05/EditStudentActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/au/edu/utas/kit305/tutorial05/EditWeekActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/au/edu/utas/kit305/tutorial05/EditWeekActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/au/edu/utas/kit305/tutorial05/StudentActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/au/edu/utas/kit305/tutorial05/StudentActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/au/edu/utas/kit305/tutorial05/StudentListFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/au/edu/utas/kit305/tutorial05/StudentListFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/au/edu/utas/kit305/tutorial05/TabbedActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/au/edu/utas/kit305/tutorial05/TabbedActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/au/edu/utas/kit305/tutorial05/WeekActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/au/edu/utas/kit305/tutorial05/WeekActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/au/edu/utas/kit305/tutorial05/WeeksListFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/au/edu/utas/kit305/tutorial05/WeeksListFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/au/edu/utas/kit305/tutorial05/classes/Mark.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/au/edu/utas/kit305/tutorial05/classes/Mark.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/au/edu/utas/kit305/tutorial05/classes/Student.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/au/edu/utas/kit305/tutorial05/classes/Student.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/au/edu/utas/kit305/tutorial05/classes/Week.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/au/edu/utas/kit305/tutorial05/classes/Week.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_edit_week.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_edit_week.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_student.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_student.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[ce041714c33a3c840d]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -183,22 +175,22 @@
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="605" y="311" key="AndroidCreateResourceDirectoryDialog/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1619251527668" />
-    <state width="2003" height="206" key="GridCell.Tab.0.bottom" timestamp="1619263429663">
+    <state width="2003" height="243" key="GridCell.Tab.0.bottom" timestamp="1619269034283">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2003" height="206" key="GridCell.Tab.0.bottom/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1619263429663" />
-    <state width="2003" height="206" key="GridCell.Tab.0.center" timestamp="1619263429663">
+    <state width="2003" height="243" key="GridCell.Tab.0.bottom/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1619269034283" />
+    <state width="2003" height="243" key="GridCell.Tab.0.center" timestamp="1619269034283">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2003" height="206" key="GridCell.Tab.0.center/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1619263429663" />
-    <state width="2003" height="206" key="GridCell.Tab.0.left" timestamp="1619263429663">
+    <state width="2003" height="243" key="GridCell.Tab.0.center/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1619269034283" />
+    <state width="2003" height="243" key="GridCell.Tab.0.left" timestamp="1619269034283">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2003" height="206" key="GridCell.Tab.0.left/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1619263429663" />
-    <state width="2003" height="206" key="GridCell.Tab.0.right" timestamp="1619263429663">
+    <state width="2003" height="243" key="GridCell.Tab.0.left/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1619269034283" />
+    <state width="2003" height="243" key="GridCell.Tab.0.right" timestamp="1619269034283">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2003" height="206" key="GridCell.Tab.0.right/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1619263429663" />
+    <state width="2003" height="243" key="GridCell.Tab.0.right/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1619269034283" />
     <state x="2591" y="-12" width="1623" height="821" maximized="true" key="dock-window-1" timestamp="1619261756086">
       <screen x="2560" y="0" width="1920" height="1030" />
     </state>

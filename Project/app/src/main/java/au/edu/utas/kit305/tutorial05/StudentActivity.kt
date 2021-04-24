@@ -58,14 +58,17 @@ class StudentActivity : AppCompatActivity() {
 
         //Share in plain text button
         ui.btnShare.setOnClickListener {
+            val funClass = TabbedActivity()
             var sendIntent = Intent().apply {
                 action = Intent.ACTION_SEND
                 var textToShare = students[studentID].full_name + "\n"
                 textToShare += "Student_ID: " + students[studentID].id + "\n"
-                textToShare += "Overall Mark: " + students[studentID].overall_mark + "\n\n"
+                textToShare += "Overall Mark: " + students[studentID].overall_mark + "%\n\n"
+
                 for (i in 0 until marks.size) {
-                    textToShare += "Week " + marks[i].week + "\n"
-                    textToShare += "Mark:" + marks[i].mark + "\n\n"
+                    val filteredMarkList: List<Week> = weeks.filter { it.number == marks[i].week }
+                    textToShare += "Week " + marks[i].week
+                    textToShare += ": " + funClass.calculateMark(filteredMarkList[0].marking_type.toString(),marks[i].mark?.toInt()!!) + "\n\n"
                 }
                 putExtra(Intent.EXTRA_TEXT, textToShare)
                 type = "text/plain"
@@ -77,7 +80,7 @@ class StudentActivity : AppCompatActivity() {
         //Marks is global for simplicity between StudentActivity and EditStudentActivity.
         marks.clear()
 
-        //Retrieve markw for the relevant student for each week.
+        //Retrieve marks for the relevant student for each week.
         val db = Firebase.firestore
         for (i in 0 until weeks.size) {
             var marksCollection = db.collection("weeks").document(weeks[i].id.toString()).collection("student_marks")
@@ -119,11 +122,12 @@ class StudentActivity : AppCompatActivity() {
                 //Retrieve relevant studentID (INDEX) from Intent
                 val studentID = intent.getIntExtra(STUDENT_INDEX, -1)
                 var studentObject = students[studentID]
+                val funClass = TabbedActivity()
 
                 //Redraw the text fields
                 ui.txtStudentID.text = studentObject.student_id
                 ui.txtStudentName.text = studentObject.full_name
-                ui.txtOverallMark.text = studentObject.overall_mark.toString()
+                ui.txtOverallMark.text = studentObject.overall_mark.toString()+"%"
 
                 //Redraw the list of marks.
                 ui.myList.adapter?.notifyDataSetChanged()
@@ -162,7 +166,6 @@ class StudentActivity : AppCompatActivity() {
             holder.listViewUI.txtNumber.text = "Week " + mark.week.toString()
             //TODO Change mark display based on marking_type
             val filteredWeekList: List<Week> = weeks.filter { it.number == mark.week }
-            filteredWeekList
             val funClass = TabbedActivity()
             holder.listViewUI.txtMarkingType.text = funClass.calculateMark(filteredWeekList[0].marking_type.toString(), mark.mark?.toInt()!!)
 
