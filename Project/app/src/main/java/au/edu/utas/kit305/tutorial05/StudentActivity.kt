@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import au.edu.utas.kit305.tutorial05.classes.Mark
+import au.edu.utas.kit305.tutorial05.classes.Week
 import au.edu.utas.kit305.tutorial05.databinding.ActivityStudentBinding
 import au.edu.utas.kit305.tutorial05.databinding.WeekListItemBinding
 import com.google.firebase.firestore.ktx.firestore
@@ -46,7 +47,7 @@ class StudentActivity : AppCompatActivity() {
         ui.average.text = AVG
         ui.txtStudentName.text = studentObject.full_name
         ui.txtStudentID.text = studentObject.student_id
-        ui.txtOverallMark.text = studentObject.overall_mark.toString()
+        ui.txtOverallMark.text = studentObject.overall_mark.toString() + "%"
 
         //Button for going to EditStudentActivity, passing the student index.
         ui.btnEdit.setOnClickListener {
@@ -160,7 +161,10 @@ class StudentActivity : AppCompatActivity() {
             val mark = marks[position]
             holder.listViewUI.txtNumber.text = "Week " + mark.week.toString()
             //TODO Change mark display based on marking_type
-            holder.listViewUI.txtMarkingType.text = mark.mark
+            val filteredWeekList: List<Week> = weeks.filter { it.number == mark.week }
+            filteredWeekList
+            val funClass = TabbedActivity()
+            holder.listViewUI.txtMarkingType.text = funClass.calculateMark(filteredWeekList[0].marking_type.toString(), mark.mark?.toInt()!!)
 
         }
     }

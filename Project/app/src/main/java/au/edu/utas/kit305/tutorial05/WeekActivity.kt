@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import au.edu.utas.kit305.tutorial05.classes.Mark
 import au.edu.utas.kit305.tutorial05.classes.Student
+import au.edu.utas.kit305.tutorial05.classes.Week
 import au.edu.utas.kit305.tutorial05.databinding.ActivityWeekBinding
 import au.edu.utas.kit305.tutorial05.databinding.WeekListItemBinding
 import com.google.firebase.firestore.ktx.firestore
@@ -17,8 +18,8 @@ import com.google.firebase.ktx.Firebase
 
 class WeekActivity : AppCompatActivity() {
 
-    private lateinit var ui : ActivityWeekBinding
-    private val weekMarks = mutableListOf<Mark>()
+    private lateinit var ui: ActivityWeekBinding
+    private var calculateMean: Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         ui = ActivityWeekBinding.inflate(layoutInflater)
@@ -27,16 +28,17 @@ class WeekActivity : AppCompatActivity() {
         val weekIndex = intent.getIntExtra(WEEK_INDEX, -1)
         var weekObject = weeks[weekIndex]
 
-        var calculateMean: Int = 0
         ui.txtStudentName.text = "Week " + weekObject.number
 
         //db setup
         val db = Firebase.firestore
+        weekMarks.clear()
         var marksCollection = db.collection("weeks").document(weekObject.id.toString()).collection("student_marks")
         marksCollection
                 .get()
                 .addOnSuccessListener { result ->
                     Log.d(FIREBASE_TAG, "---Week " + weekObject.number + " Marks ---")
+                    calculateMean = 0
                     for (document in result) {
                         //Log.d(FIREBASE_TAG, document.toString())
                         val weekMark = document.toObject<Mark>()
@@ -46,7 +48,9 @@ class WeekActivity : AppCompatActivity() {
                         (ui.myList.adapter as MarkAdapter).notifyDataSetChanged()
                     }
                     calculateMean /= weekMarks.size
-                    ui.txtClassAverage.text = calculateMean.toString()
+                    var filteredMark: String = ""
+                    val funClass = TabbedActivity()
+                    ui.txtClassAverage.text = funClass.calculateMark(weekObject?.marking_type!!,calculateMean)
                 }
         ui.myList.adapter = MarkAdapter(weekMarks)
         ui.myList.layoutManager = LinearLayoutManager(this)
@@ -54,9 +58,6 @@ class WeekActivity : AppCompatActivity() {
         //TODO Change mark display based on marking_type
         ui.txtMarkingType.text = weekObject.marking_type
         ui.txtClassAverageHeading.text = "Average"
-
-        Log.d(FIREBASE_TAG, "weekMarks.size is : "+weekMarks.size.toString())
-        Log.d(FIREBASE_TAG, "calculateMean.toString() is : $calculateMean")
 
         //Share in plain text button
         ui.btnShare.setOnClickListener {
@@ -79,8 +80,32 @@ class WeekActivity : AppCompatActivity() {
             startActivity(Intent.createChooser(sendIntent, "Share via..."))
         }
 
+        //Edit the marks for the work, and the schema.
+        ui.btnEdit.setOnClickListener {
+            val i = Intent(this, EditWeekActivity::class.java)
+            i.putExtra(WEEK_INDEX, weekIndex)
+            startActivityForResult(i, EDITED_WEEK_CODE)
+        }
 
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+
+        if (requestCode == EDITED_WEEK_CODE && resultCode == EDITED_WEEK_CODE) {
+            val weekID = intent.getIntExtra(WEEK_INDEX, -1)
+            ui.txtMarkingType.text = weeks[weekID].marking_type.toString()
+            ui.myList.adapter?.notifyDataSetChanged()
+
+
+            val funClass = TabbedActivity()
+            ui.txtClassAverage.text = funClass.calculateMark(weeks[weekID].marking_type.toString(),calculateMean)
+
+            //TODO GET Rid of this Log.d(FIREBASE_TAG, funClass.calculateMark(weeks[weekID].marking_type.toString(),calculateMean))
+        } else {
+            super.onActivityResult(requestCode, resultCode, data)
+        }
+    }
+
     inner class MarkHolder(var listViewUI: WeekListItemBinding) : RecyclerView.ViewHolder(listViewUI.root) {}
     inner class MarkAdapter(private val weekMarks: MutableList<Mark>) : RecyclerView.Adapter<WeekActivity.MarkHolder>() {
         //Inflates a new row, and wraps it in a new ViewHolder
@@ -88,23 +113,55 @@ class WeekActivity : AppCompatActivity() {
             val listViewUI = WeekListItemBinding.inflate(layoutInflater, parent, false)
             return MarkHolder(listViewUI)
         }
+
         //Returns the size of the array
         override fun getItemCount(): Int {
             return weekMarks.size
         }
+
         //Populates each row
         override fun onBindViewHolder(holder: WeekActivity.MarkHolder, position: Int) {
             val mark = weekMarks[position]
+            val filteredWeekList: List<Week> = weeks.filter { it.number == mark.week }
             var name: String
-            var filteredList: List<Student> = students.filter { it.id == mark.id }
+            var filteredStudentList: List<Student> = students.filter { it.id == mark.id }
 
-            if (filteredList.isNotEmpty()){
-                name = filteredList[0].full_name.toString()
-            }else{
+            if (filteredStudentList.isNotEmpty()) {
+                name = filteredStudentList[0].full_name.toString()
+            } else {
                 name = "Deleted Student"
             }
             holder.listViewUI.txtNumber.text = name
-            holder.listViewUI.txtMarkingType.text = mark.mark
+            //var filteredMark: String = ""
+            val funClass = TabbedActivity()
+            holder.listViewUI.txtMarkingType.text = funClass.calculateMark(filteredWeekList[0].marking_type.toString(), mark.mark?.toInt()!!)
+            /*
+            when (filteredWeekList[0].marking_type) {
+                "Percentage" -> {
+                    filteredMark = mark.mark + "%"
+                }
+                "HD/DN/CR/PP/NN" -> {
+                    filteredMark = when(mark.mark?.toInt()){
+                        100 -> "HD+"
+                        in 80..99 -> "HD"
+                        in 70..79 -> "DN"
+                        in 60..69 -> "CR"
+                        in 50..59 -> "PP"
+                        else -> "NN"
+                    }
+                }
+                "A/B/C/D/F" -> {
+                    filteredMark = when(mark.mark?.toInt()) {
+                        100 -> "A"
+                        in 80..99 -> "B"
+                        in 70..79 -> "C"
+                        in 60..69 -> "D"
+                        else -> "F"
+                    }
+                }
+            }
+            holder.listViewUI.txtMarkingType.text = filteredMark
+            */
             //TODO Change mark display based on marking_type
         }
     }

@@ -26,6 +26,7 @@ import androidx.core.content.FileProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import au.edu.utas.kit305.tutorial05.classes.Mark
+import au.edu.utas.kit305.tutorial05.classes.Week
 import au.edu.utas.kit305.tutorial05.databinding.ActivityEditStudentBinding
 import au.edu.utas.kit305.tutorial05.databinding.WeekListItemBinding
 import com.google.firebase.firestore.ktx.firestore
@@ -95,7 +96,7 @@ class EditStudentActivity : AppCompatActivity() {
         val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         if (takePictureIntent.resolveActivity(packageManager) != null) {
             try {
-                val photoFile: File = createImageFile()!!
+                val photoFile: File = createImageFile()
                 val photoURI: Uri = FileProvider.getUriForFile(
                         this,
                         "au.edu.utas.kit305.tutorial5",
@@ -191,13 +192,12 @@ class EditStudentActivity : AppCompatActivity() {
             studentCollection.document(studentObject.id.toString())
                     .set(studentObject)
                     .addOnSuccessListener {
-                        Log.d(FIREBASE_TAG, "Successfully updated student ${studentObject?.id}")
+                        Log.d(FIREBASE_TAG, "Successfully updated student ${studentObject.id}")
                     }
 
             //Uploading an image. Taken from: https://firebase.google.com/docs/storage/android/upload-files#upload_from_data_in_memory
-            var mStorageRef: StorageReference = FirebaseStorage.getInstance().reference;
-            var param: String = "studentPictures/" + students[studentID].id + ".jpg"
-            val studentPictureRef = mStorageRef.child(param)
+            var studentPictureRef: StorageReference = FirebaseStorage.getInstance().reference.child("studentPictures/" + students[studentID].id + ".jpg")
+
             if (ui.imageView.drawable != null) {
                 val bitmap = (ui.imageView.drawable as BitmapDrawable).bitmap
                 val baos = ByteArrayOutputStream()
@@ -206,7 +206,7 @@ class EditStudentActivity : AppCompatActivity() {
                 var uploadTask = studentPictureRef.putBytes(data)
                 uploadTask.addOnFailureListener {
                     Log.d(FIREBASE_TAG, "Failed to upload image")
-                }.addOnSuccessListener { taskSnapshot ->
+                }.addOnSuccessListener { _ ->
                     Log.d(FIREBASE_TAG, "Uploaded image")
                 }
             }
@@ -230,7 +230,7 @@ class EditStudentActivity : AppCompatActivity() {
         //Deleting a Student
         ui.btnDeleteStudent.setOnClickListener {
             val dialogClickListener =
-                    DialogInterface.OnClickListener { dialog, which ->
+                    DialogInterface.OnClickListener { _, which ->
                         when (which) {
                             DialogInterface.BUTTON_POSITIVE -> {
 
@@ -276,7 +276,7 @@ class EditStudentActivity : AppCompatActivity() {
         } else if (requestCode == IMAGE_CODE && resultCode == RESULT_OK && data != null) {
             //Intentionally using thumbnail sized intent data for potential storage limitations
             //Retrieve the image taken and use it in imageView.
-            val takenImage = data?.extras?.get("data") as Bitmap
+            val takenImage = data.extras?.get("data") as Bitmap
             ui.imageView.setImageBitmap(takenImage)
         } else {
             super.onActivityResult(requestCode, resultCode, data)
@@ -300,22 +300,35 @@ class EditStudentActivity : AppCompatActivity() {
         //Populates each row
         override fun onBindViewHolder(holder: EditStudentActivity.MarkHolder, position: Int) {
             val mark = marks[position]
+
             holder.listViewUI.txtNumber.text = "Week " + mark.week.toString()
-            holder.listViewUI.txtMarkingType.text = mark.mark
+            val filteredWeekList: List<Week> = weeks.filter { it.number == mark.week }
+            val funClass = TabbedActivity()
+            holder.listViewUI.txtMarkingType.text = funClass.calculateMark(filteredWeekList[0].marking_type.toString(), mark.mark?.toInt()!!)
 
             //EditText inside an AlertDialog taken from https://handyopinion.com/show-alert-dialog-with-an-input-field-edittext-in-android-kotlin/
             holder.listViewUI.root.setOnClickListener {
                 val input = EditText(context)
                 input.inputType = InputType.TYPE_CLASS_TEXT
-                input.hint = mark.mark
+                var tempString= funClass.calculatePercentage(mark.mark!!)
+                tempString = funClass.calculateMark(filteredWeekList[0].marking_type.toString(), tempString.toInt())
+                input.hint = tempString
 
                 val dialogClickListener =
-                        DialogInterface.OnClickListener { dialog, which ->
+                        DialogInterface.OnClickListener { _, which ->
                             when (which) {
                                 DialogInterface.BUTTON_POSITIVE -> {
                                     var inputText = input.text.toString()
-                                    holder.listViewUI.txtMarkingType.text = inputText
+                                    val funClass = TabbedActivity()
+
+                                    //Turn user input to a percentage
+                                    inputText = funClass.calculatePercentage(inputText)
+                                    //Store the percentage
                                     marks[position].mark = inputText
+                                    //Translate to the appropriate marking schema (If you enter HD for week 3 it will be converted to 80, then converted to whatever is appropriate for that week.)
+                                    inputText = funClass.calculateMark(filteredWeekList[0].marking_type.toString(), inputText.toInt())
+                                    //Fill the textView
+                                    holder.listViewUI.txtMarkingType.text = inputText
                                 }
                                 DialogInterface.BUTTON_NEGATIVE -> {
 

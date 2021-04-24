@@ -22,10 +22,6 @@
         android:theme="@style/Theme.Tutorial04_Final">
         <activity android:name=".EditWeekActivity"></activity>
         <activity
-            android:name=".MainActivity3"
-            android:label="@string/title_activity_main3"
-            android:theme="@style/Theme.Tutorial04_Final.NoActionBar" />
-        <activity
             android:name=".WeekActivity"
             android:label="@string/title_activity_week"
             android:theme="@style/Theme.Tutorial04_Final.NoActionBar" />
@@ -37,17 +33,13 @@
         <activity android:name=".StudentActivity" />
         <activity
             android:name=".TabbedActivity"
-            android:label="@string/title_activity_main2"
+            android:label="Tutorial Marking"
             android:theme="@style/Theme.Tutorial04_Final.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MovieDetails" />
-        <activity android:name=".MainActivity" />
-
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.example.week05camera"

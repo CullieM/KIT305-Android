@@ -17,12 +17,9 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 
-
-private lateinit var inflatedView: FragmentStudentBinding
-
 class StudentListFragment : Fragment() {
 
-
+    private lateinit var inflatedView: FragmentStudentBinding
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == ADD_STUDENT_CODE) {
             inflatedView.myList.adapter?.notifyDataSetChanged()
@@ -53,7 +50,7 @@ class StudentListFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        students.clear()
         //Data retrieval from DB, fill the recyclerView.
         val db = Firebase.firestore
         var studentsCollection = db.collection("students")
@@ -95,7 +92,7 @@ class StudentListFragment : Fragment() {
             holder.ui.txtStudentID.text = student.student_id
 
             //TODO Change mark display based on marking_type
-            holder.ui.txtOverallMark.text = student.overall_mark.toString()
+            holder.ui.txtOverallMark.text = student.overall_mark.toString() + "%"
 
             holder.ui.root.setOnClickListener {
                 var i = Intent(holder.ui.root.context, StudentActivity::class.java)

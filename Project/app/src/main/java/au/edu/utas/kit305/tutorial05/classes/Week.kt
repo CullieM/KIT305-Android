@@ -1,4 +1,4 @@
-package au.edu.utas.kit305.tutorial05
+package au.edu.utas.kit305.tutorial05.classes
 
 import android.os.Parcel
 import android.os.Parcelable

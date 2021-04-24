@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import au.edu.utas.kit305.tutorial05.classes.Week
+import au.edu.utas.kit305.tutorial05.databinding.FragmentStudentBinding
 import au.edu.utas.kit305.tutorial05.databinding.FragmentWeeksBinding
 import au.edu.utas.kit305.tutorial05.databinding.WeekListItemBinding
 import com.google.firebase.firestore.ktx.firestore
@@ -17,13 +18,14 @@ import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 
 class WeeksListFragment : Fragment() {
+    private lateinit var inflatedView: FragmentWeeksBinding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        var inflatedView = FragmentWeeksBinding.inflate(layoutInflater, container, false)
-
+        inflatedView = FragmentWeeksBinding.inflate(layoutInflater, container, false)
+        weeks.clear()
         //db setup
         val db = Firebase.firestore
         var weeksCollection = db.collection("weeks")
@@ -46,7 +48,10 @@ class WeeksListFragment : Fragment() {
         inflatedView.myList.layoutManager = LinearLayoutManager(this.activity)
         return inflatedView.root
     }
-
+    override fun onResume() {
+        super.onResume()
+        inflatedView.myList.adapter?.notifyDataSetChanged()
+    }
     inner class WeekHolder(var ui: WeekListItemBinding) : RecyclerView.ViewHolder(ui.root) {}
 
     inner class WeekAdapter(private val weeks: MutableList<Week>) : RecyclerView.Adapter<WeekHolder>() {
