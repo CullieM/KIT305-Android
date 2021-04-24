@@ -5,12 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".StudentActivity">
+
     <EditText
         android:id="@+id/txtStudentName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="28dp"
         android:text="TextView"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -38,32 +39,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@android:drawable/ic_menu_save" />
 
-    <TextView
-        android:id="@+id/txtOverallMark"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
-        android:text="TextView"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:layout_constraintBottom_toTopOf="@+id/btnSave"
-        app:layout_constraintEnd_toEndOf="@+id/average" />
-
-    <TextView
-        android:id="@+id/average"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
-        android:layout_marginBottom="24dp"
-        android:text="TextView"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:layout_constraintBottom_toTopOf="@+id/txtOverallMark"
-        app:layout_constraintEnd_toEndOf="parent" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/myList"
-        android:layout_width="217dp"
-        android:layout_height="431dp"
+        android:layout_width="174dp"
+        android:layout_height="359dp"
         android:layout_marginTop="36dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.086"
@@ -73,8 +52,9 @@
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="500px"
-        android:layout_height="600px"
-        app:layout_constraintEnd_toEndOf="@+id/average"
+        android:layout_height="500px"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toEndOf="@+id/myList"
         app:layout_constraintTop_toTopOf="@+id/txtStudentName"
         tools:srcCompat="@tools:sample/avatars" />
 
@@ -96,8 +76,9 @@
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/myList"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/myList"
         app:layout_constraintTop_toBottomOf="@+id/myList"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.678" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

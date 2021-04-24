@@ -1,5 +1,6 @@
 package au.edu.utas.kit305.tutorial05
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -24,7 +25,13 @@ private lateinit var ui : FragmentStudentBinding
 
 class StudentListFragment : Fragment() {
 
-
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if(resultCode == ADD_STUDENT_CODE) {
+            inflatedView.myList.adapter?.notifyDataSetChanged()
+        }else {
+            super.onActivityResult(requestCode, resultCode, data)
+        }
+    }
     override fun onResume() {
         super.onResume()
 
@@ -38,12 +45,14 @@ class StudentListFragment : Fragment() {
         inflatedView = FragmentStudentBinding.inflate(layoutInflater, container, false)
         inflatedView.myList.adapter = StudentAdapter(students)
         inflatedView.myList.layoutManager = LinearLayoutManager(this.activity)
+        inflatedView.button.setOnClickListener{
+            var intent = Intent(context, AddStudentActivity::class.java)
+            startActivityForResult(intent, Activity.RESULT_OK)
+        }
         return inflatedView.root
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //add new student button
-        //TODO THIS IS BROKEN
 
         //db setup
         val db = Firebase.firestore
@@ -62,6 +71,7 @@ class StudentListFragment : Fragment() {
                     }
                     students.sortBy{ it.student_id?.toInt() }
                 }
+
     }
 
     inner class StudentHolder(var ui: StudentListItemBinding) : RecyclerView.ViewHolder(ui.root) {}

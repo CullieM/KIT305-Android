@@ -19,44 +19,48 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="350px"
-        android:layout_height="350px"
-        android:layout_marginStart="12dp"
-        android:layout_marginLeft="12dp"
+        android:layout_width="500px"
+        android:layout_height="500px"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:scaleType="centerCrop"
         app:layout_constraintStart_toEndOf="@+id/editStudentID"
         app:layout_constraintTop_toTopOf="@+id/editName"
         tools:srcCompat="@tools:sample/avatars" />
 
     <ImageButton
         android:id="@+id/imageButton2"
-        android:layout_width="22dp"
-        android:layout_height="28dp"
+        android:layout_width="42dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginRight="4dp"
         app:layout_constraintEnd_toStartOf="@+id/imageView2"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
         app:srcCompat="@android:drawable/ic_menu_camera" />
 
     <EditText
         android:id="@+id/editName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginLeft="28dp"
-        android:layout_marginTop="52dp"
+        android:layout_width="178dp"
+        android:layout_height="61dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="76dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name"
+        android:text=""
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <EditText
         android:id="@+id/editStudentID"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_width="178dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="64dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="StudentID"
-        app:layout_constraintEnd_toEndOf="@+id/editName"
+        android:inputType="number"
+        android:text=""
+        app:layout_constraintStart_toStartOf="@+id/editName"
         app:layout_constraintTop_toBottomOf="@+id/editName" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -70,5 +74,21 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@android:drawable/ic_menu_save" />
+
+    <TextView
+        android:id="@+id/txtAddName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name"
+        app:layout_constraintBottom_toTopOf="@+id/editName"
+        app:layout_constraintStart_toStartOf="@+id/editName" />
+
+    <TextView
+        android:id="@+id/txtAddStudentID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="StudentID"
+        app:layout_constraintBottom_toTopOf="@+id/editStudentID"
+        app:layout_constraintStart_toStartOf="@+id/editStudentID" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

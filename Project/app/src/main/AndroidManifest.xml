@@ -20,10 +20,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Tutorial04_Final">
+        <activity android:name=".EditWeekActivity"></activity>
         <activity
             android:name=".MainActivity3"
             android:label="@string/title_activity_main3"
-            android:theme="@style/Theme.Tutorial04_Final.NoActionBar"></activity>
+            android:theme="@style/Theme.Tutorial04_Final.NoActionBar" />
         <activity
             android:name=".WeekActivity"
             android:label="@string/title_activity_week"

@@ -2,6 +2,7 @@ package au.edu.utas.kit305.tutorial05
 
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -21,9 +22,9 @@ import com.google.firebase.storage.StorageReference
 const val LAUNCH_SECOND_ACTIVITY = 2
 const val AVG = "Average"
 const val ONE_MEGABYTE: Long = 1024 * 1024
+val marks = mutableListOf<Mark>()
 class StudentActivity : AppCompatActivity() {
     private lateinit var ui : ActivityStudentBinding
-    private val marks = mutableListOf<Mark>()
 
     //Upon returning from Edit Student Activity
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -33,6 +34,7 @@ class StudentActivity : AppCompatActivity() {
             val studentID = intent.getIntExtra(STUDENT_INDEX, -1)
             students.removeAt(studentID)
             students = students.filterNotNull().toMutableList()
+
             finish()
         }else if (resultCode == EDITED_CODE) {
             //Retrieve studentID (INDEX) from Intent
@@ -41,28 +43,47 @@ class StudentActivity : AppCompatActivity() {
             //Redraw the text fields
             ui.txtStudentID.text = studentObject.student_id
             ui.txtStudentName.text = studentObject.full_name
+            ui.txtOverallMark.text = studentObject.overall_mark.toString()
+            ui.myList.adapter?.notifyDataSetChanged()
+            /*
+            val updatedImage: ByteArray? = intent.getByteArrayExtra(IMAGE_EXTRA)
+            val bitmapUpdatedImage = BitmapFactory.decodeByteArray(updatedImage,0,
+                updatedImage?.size!!
+            )
+            ui.imageView.setImageBitmap(bitmapUpdatedImage)
+             */
+            var mStorageRef : StorageReference = FirebaseStorage.getInstance().reference.child("studentPictures/" + students[studentID].id + ".jpg")
+            mStorageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener {
+                val takenImage = BitmapFactory.decodeByteArray(it,0,it.size)
+                ui.imageView.setImageBitmap(takenImage)
+                Log.d(FIREBASE_TAG,"Downloaded image")
+            }.addOnFailureListener {
+                Log.d(FIREBASE_TAG,"Failed to download image")
+            }
         }
 
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         //View binding
         ui = ActivityStudentBinding.inflate(layoutInflater)
         setContentView(ui.root)
+
 
         //Retrieve studentID (INDEX) from intent, upon selecting from StudentListFragment
         val studentID = intent.getIntExtra(STUDENT_INDEX, -1)
         var studentObject = students[studentID]
 
-        //DOWNLOAD IMAGE FROM CLOUDSTORE
-        var mStorageRef : StorageReference = FirebaseStorage.getInstance().reference;
-        var childStorageRef = mStorageRef.child("studentPictures/" + students[studentID].id + ".jpg")
-        val ONE_MEGABYTE: Long = 1024 * 1024
+
+        //TODO DOWNLOAD IMAGE FROM CLOUDSTORE
+        var mStorageRef : StorageReference = FirebaseStorage.getInstance().reference.child("studentPictures/" + students[studentID].id + ".jpg")
         mStorageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener {
-            val takenImage = it as Bitmap
+            val takenImage = BitmapFactory.decodeByteArray(it,0,it.size)
             ui.imageView.setImageBitmap(takenImage)
+            Log.d(FIREBASE_TAG,"Downloaded image")
         }.addOnFailureListener {
-            // Handle any errors
+            Log.d(FIREBASE_TAG,"Failed to download image")
         }
 
         //Pre-fill the TextViews
@@ -78,10 +99,13 @@ class StudentActivity : AppCompatActivity() {
             startActivityForResult(i, LAUNCH_SECOND_ACTIVITY)
         }
         //Share in plain text button
+        //TODO Add summary info
         ui.btnShare.setOnClickListener {
             var sendIntent = Intent().apply {
                 action = Intent.ACTION_SEND
-                var textToShare = students[studentID].full_name + "\n\n" + ""
+                var textToShare = students[studentID].full_name + "\n"
+                textToShare += "Student_ID: " + students[studentID].id + "\n"
+                textToShare += "Overall Mark: " + students[studentID].overall_mark + "\n\n"
                 for(i in 0 until marks.size) {
                     textToShare += "Week " + marks[i].week + "\n"
                     textToShare += "Mark:" + marks[i].mark + "\n\n"
@@ -91,8 +115,10 @@ class StudentActivity : AppCompatActivity() {
             startActivity(Intent.createChooser(sendIntent, "Share via..."))
 
         }
-        //db setup
+        //db setup and recycler view display
+
         val db = Firebase.firestore
+        marks.clear()
         for (i in 0 until weeks.size) {
             var marksCollection = db.collection("weeks").document(weeks[i].id.toString()).collection("student_marks")
             marksCollection

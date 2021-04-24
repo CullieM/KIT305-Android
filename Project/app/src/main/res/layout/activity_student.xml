@@ -10,8 +10,8 @@
         android:id="@+id/txtStudentName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="40dp"
         android:text="TextView"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -43,11 +43,11 @@
         android:id="@+id/txtOverallMark"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="28dp"
-        android:layout_marginRight="28dp"
-        android:layout_marginBottom="28dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginBottom="48dp"
         android:text="TextView"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+
         app:layout_constraintBottom_toTopOf="@+id/btnShare"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -55,7 +55,7 @@
         android:id="@+id/average"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="4dp"
         android:text="TextView"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintBottom_toTopOf="@+id/txtOverallMark"
@@ -63,18 +63,21 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/myList"
-        android:layout_width="225dp"
-        android:layout_height="489dp"
+        android:layout_width="174dp"
+        android:layout_height="421dp"
         android:layout_marginTop="36dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.086"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtStudentID" />
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="500px"
         android:layout_height="500px"
+        android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="@+id/average"
+        app:layout_constraintStart_toEndOf="@+id/myList"
         app:layout_constraintTop_toTopOf="@+id/txtStudentName"
         tools:srcCompat="@tools:sample/avatars" />
 

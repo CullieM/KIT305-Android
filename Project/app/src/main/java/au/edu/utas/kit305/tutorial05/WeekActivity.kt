@@ -1,9 +1,14 @@
 package au.edu.utas.kit305.tutorial05
 
+import android.R.*
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -24,45 +29,60 @@ class WeekActivity : AppCompatActivity() {
 
         val weekIndex = intent.getIntExtra(WEEK_INDEX, -1)
         var weekObject = weeks[weekIndex]
-        ui.txtStudentName.text = "Week "+weekObject.number
+
+        var calculateMean: Int = 0
+        ui.txtStudentName.text = "Week " + weekObject.number
+
         //db setup
         val db = Firebase.firestore
         var marksCollection = db.collection("weeks").document(weekObject.id.toString()).collection("student_marks")
         marksCollection
-            .get()
-            .addOnSuccessListener { result ->
-                Log.d(FIREBASE_TAG, "---Week "+weekObject.number+" Marks ---")
-                for (document in result)
-                {
-                    //Log.d(FIREBASE_TAG, document.toString())
-                    val weekMark = document.toObject<Mark>()
-                    Log.d(FIREBASE_TAG, weekMark.toString())
-                    weekMarks.add(weekMark)
-                    (ui.myList.adapter as MarkAdapter).notifyDataSetChanged()
+                .get()
+                .addOnSuccessListener { result ->
+                    Log.d(FIREBASE_TAG, "---Week " + weekObject.number + " Marks ---")
+                    for (document in result) {
+                        //Log.d(FIREBASE_TAG, document.toString())
+                        val weekMark = document.toObject<Mark>()
+                        Log.d(FIREBASE_TAG, weekMark.toString())
+                        calculateMean += weekMark.mark?.toInt()!!
+                        weekMarks.add(weekMark)
+                        (ui.myList.adapter as MarkAdapter).notifyDataSetChanged()
+                    }
+                    calculateMean /= weekMarks.size
+                    ui.txtClassAverage.text = calculateMean.toString()
                 }
-            }
         ui.myList.adapter = MarkAdapter(weekMarks)
         ui.myList.layoutManager = LinearLayoutManager(this)
+
+        //TODO Marking types
+        ui.txtMarkingType.text = weekObject.marking_type
+        ui.txtClassAverageHeading.text = "Average"
+
+        Log.d(FIREBASE_TAG, "weekMarks.size is : "+weekMarks.size.toString())
+        Log.d(FIREBASE_TAG, "calculateMean.toString() is : $calculateMean")
 
         //Share in plain text button
         ui.btnShare.setOnClickListener {
             var sendIntent = Intent().apply {
                 action = Intent.ACTION_SEND
-                var textToShare = "Week " + weeks[weekIndex].number + "\n\n"
-                for(i in 0 until weekMarks.size) {
+                var textToShare = "Week " + weeks[weekIndex].number + "\n"
+                textToShare += "Class Average: $calculateMean\n\n"
+                for (i in 0 until weekMarks.size) {
                     val mark = weekMarks[i]
                     var filteredList: List<Student> = students.filter { it.id == mark.id }
-                    if (filteredList.isNotEmpty()){
-                        var name = filteredList[0].full_name.toString()
-                        textToShare += name+ "\n"
+                    if (filteredList.isNotEmpty()) {
+                        val name = filteredList[0].full_name.toString()
+                        textToShare += name + "\n"
                         textToShare += "Mark:" + weekMarks[i].mark + "\n\n"
                     }
                 }
                 putExtra(Intent.EXTRA_TEXT, textToShare)
-                type = "text/plain"}
+                type = "text/plain"
+            }
             startActivity(Intent.createChooser(sendIntent, "Share via..."))
-
         }
+
+
     }
     inner class MarkHolder(var listViewUI: WeekListItemBinding) : RecyclerView.ViewHolder(listViewUI.root) {}
     inner class MarkAdapter(private val weekMarks: MutableList<Mark>) : RecyclerView.Adapter<WeekActivity.MarkHolder>() {
@@ -87,7 +107,10 @@ class WeekActivity : AppCompatActivity() {
                 name = "Deleted Student"
             }
             holder.listViewUI.txtNumber.text = name
+
             holder.listViewUI.txtMarkingType.text = mark.mark
+            //TODO Change mark style based on spinner
+            //if(weeks[weekIndex].id == "")
         }
     }
 }

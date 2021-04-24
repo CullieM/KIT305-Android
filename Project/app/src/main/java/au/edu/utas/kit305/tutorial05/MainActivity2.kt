@@ -26,11 +26,5 @@ class MainActivity2 : AppCompatActivity() {
        viewPager.adapter = sectionsPagerAdapter
        val tabs: TabLayout = findViewById(R.id.tabs)
        tabs.setupWithViewPager(viewPager)
-        val fab: FloatingActionButton = findViewById(R.id.fab)
-
-        fab.setOnClickListener { view ->
-            val intent = Intent(this, AddStudentActivity::class.java)
-            startActivityForResult(intent, Activity.RESULT_OK)
-        }
     }
 }

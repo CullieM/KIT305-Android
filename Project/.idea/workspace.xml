@@ -29,22 +29,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4493afd4-64b0-4e6d-baad-f9ef9084e319" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/au/edu/utas/kit305/tutorial05/EditWeekActivity.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_edit_week.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/au/edu/utas/kit305/tutorial05/AddStudentActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/au/edu/utas/kit305/tutorial05/AddStudentActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/au/edu/utas/kit305/tutorial05/EditStudentActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/au/edu/utas/kit305/tutorial05/EditStudentActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/au/edu/utas/kit305/tutorial05/MainActivity2.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/au/edu/utas/kit305/tutorial05/MainActivity2.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/au/edu/utas/kit305/tutorial05/Mark.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/au/edu/utas/kit305/tutorial05/Mark.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/au/edu/utas/kit305/tutorial05/StudentActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/au/edu/utas/kit305/tutorial05/StudentActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/au/edu/utas/kit305/tutorial05/StudentListFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/au/edu/utas/kit305/tutorial05/StudentListFragment.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/au/edu/utas/kit305/tutorial05/WeekActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/au/edu/utas/kit305/tutorial05/WeekActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_add_student.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_add_student.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_edit_student.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_edit_student.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_student.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_student.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_week.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_week.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_student.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_student.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/navigation/nav_graph.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/navigation/nav_graph.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,6 +74,9 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="android.template.1928102834">
+      <recent name="au.edu.utas.kit305.tutorial05" />
+    </key>
     <key name="android.template.361602857">
       <recent name="au.edu.utas.kit305.tutorial05" />
     </key>
@@ -164,31 +170,48 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="2003" height="263" key="GridCell.Tab.0.bottom" timestamp="1619137650418">
+    <state x="816" y="272" key="#com.intellij.ide.util.MemberChooser" timestamp="1619161633243">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2003" height="263" key="GridCell.Tab.0.bottom/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1619137650418" />
-    <state width="2003" height="263" key="GridCell.Tab.0.center" timestamp="1619137650418">
+    <state x="816" y="272" key="#com.intellij.ide.util.MemberChooser/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1619161633243" />
+    <state width="2003" height="263" key="GridCell.Tab.0.bottom" timestamp="1619240120011">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2003" height="263" key="GridCell.Tab.0.center/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1619137650418" />
-    <state width="2003" height="263" key="GridCell.Tab.0.left" timestamp="1619137650418">
+    <state width="2003" height="263" key="GridCell.Tab.0.bottom/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1619240120011" />
+    <state width="2003" height="263" key="GridCell.Tab.0.center" timestamp="1619240120011">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2003" height="263" key="GridCell.Tab.0.left/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1619137650418" />
-    <state width="2003" height="263" key="GridCell.Tab.0.right" timestamp="1619137650418">
+    <state width="2003" height="263" key="GridCell.Tab.0.center/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1619240120010" />
+    <state width="2003" height="263" key="GridCell.Tab.0.left" timestamp="1619240120010">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2003" height="263" key="GridCell.Tab.0.right/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1619137650418" />
-    <state x="2624" y="-15" width="1507" height="1097" maximized="true" key="dock-window-1" timestamp="1619133186643">
+    <state width="2003" height="263" key="GridCell.Tab.0.left/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1619240120010" />
+    <state width="2003" height="263" key="GridCell.Tab.0.right" timestamp="1619240120011">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state width="2003" height="263" key="GridCell.Tab.0.right/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1619240120011" />
+    <state x="2598" y="-8" width="1623" height="1097" maximized="true" key="dock-window-1" timestamp="1619155995758">
       <screen x="2560" y="0" width="1920" height="1030" />
     </state>
-    <state x="2624" y="-15" width="1507" height="1097" maximized="true" key="dock-window-1/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1619133186643" />
-    <state x="2910" y="92" width="1507" height="764" key="dock-window-2" timestamp="1619133845344">
+    <state x="2598" y="-8" width="1623" height="1097" maximized="true" key="dock-window-1/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1619155995758" />
+    <state x="2592" y="-13" width="1623" height="945" maximized="true" key="dock-window-2" timestamp="1619223452796">
       <screen x="2560" y="0" width="1920" height="1030" />
     </state>
-    <state x="2910" y="92" width="1507" height="764" key="dock-window-2/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1619133845344" />
+    <state x="2592" y="-13" width="1623" height="945" maximized="true" key="dock-window-2/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1619223452796" />
+    <state x="2726" y="108" width="1621" height="944" key="dock-window-3" timestamp="1619223648833">
+      <screen x="2560" y="0" width="1920" height="1030" />
+    </state>
+    <state x="2726" y="108" width="1621" height="944" key="dock-window-3/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1619223648833" />
+    <state x="2640" y="143" width="1621" height="944" key="dock-window-4" timestamp="1619233155363">
+      <screen x="2560" y="0" width="1920" height="1030" />
+    </state>
+    <state x="2640" y="143" width="1621" height="944" key="dock-window-4/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1619233155363" />
+    <state x="687" y="243" width="672" height="678" key="search.everywhere.popup" timestamp="1619230580968">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="687" y="243" width="672" height="678" key="search.everywhere.popup/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1619230580968" />
   </component>
 </project>
