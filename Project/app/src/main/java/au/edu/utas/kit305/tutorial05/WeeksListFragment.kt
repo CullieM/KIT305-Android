@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import au.edu.utas.kit305.tutorial05.classes.Week
-import au.edu.utas.kit305.tutorial05.databinding.FragmentStudentBinding
 import au.edu.utas.kit305.tutorial05.databinding.FragmentWeeksBinding
 import au.edu.utas.kit305.tutorial05.databinding.WeekListItemBinding
 import com.google.firebase.firestore.ktx.firestore

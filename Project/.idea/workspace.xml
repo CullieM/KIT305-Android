@@ -32,16 +32,17 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/au/edu/utas/kit305/tutorial05/EditWeekActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/au/edu/utas/kit305/tutorial05/EditWeekActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/au/edu/utas/kit305/tutorial05/StudentActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/au/edu/utas/kit305/tutorial05/StudentActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/au/edu/utas/kit305/tutorial05/WeekActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/au/edu/utas/kit305/tutorial05/WeekActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/au/edu/utas/kit305/tutorial05/classes/Week.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/au/edu/utas/kit305/tutorial05/classes/Week.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_student.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_student.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/au/edu/utas/kit305/tutorial05/TabbedActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/au/edu/utas/kit305/tutorial05/TabbedActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/au/edu/utas/kit305/tutorial05/WeeksListFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/au/edu/utas/kit305/tutorial05/WeeksListFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_edit_student.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_edit_student.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_edit_week.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_edit_week.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[ce041714c33a3c840d]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />

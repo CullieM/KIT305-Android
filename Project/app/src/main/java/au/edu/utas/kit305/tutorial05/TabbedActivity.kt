@@ -8,6 +8,9 @@ import au.edu.utas.kit305.tutorial05.classes.Student
 import au.edu.utas.kit305.tutorial05.classes.Week
 import au.edu.utas.kit305.tutorial05.ui.main.SectionsPagerAdapter
 import com.google.android.material.tabs.TabLayout
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObject
+import com.google.firebase.ktx.Firebase
 
 //GLOBAL VARIABLES
 
@@ -104,5 +107,42 @@ class TabbedActivity : AppCompatActivity() {
             }
             return output
         }
+    }
+    fun calculateOverallStudentMark(studentID: String) : Int{
+        var output = 0
+        val db = Firebase.firestore
+        var tempMark : Mark
+
+        for(i in 0..weeks.size){
+            db.collection("weeks")
+                    .document(weeks[i].id.toString())
+                    .collection("student_marks")
+                    .document(studentID)
+                    .get()
+                    .addOnSuccessListener {
+                        tempMark = it.toObject<Mark>()!!
+                        output += tempMark.mark?.toInt()!!
+                    }
+        }
+        return output
+    }
+
+    fun calculateOverallWeekMark(weekID: String) : Int{
+        var output = 0
+        val db = Firebase.firestore
+        var tempMark : Mark
+
+        for(i in 0..students.size){
+            db.collection("weeks")
+                    .document(weekID)
+                    .collection("student_marks")
+                    .document(students[i].id.toString())
+                    .get()
+                    .addOnSuccessListener {
+                        tempMark = it.toObject<Mark>()!!
+                        output += tempMark.mark?.toInt()!!
+                    }
+        }
+        return output
     }
 }

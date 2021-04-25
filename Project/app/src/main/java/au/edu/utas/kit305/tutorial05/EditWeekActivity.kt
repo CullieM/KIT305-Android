@@ -60,7 +60,7 @@ class EditWeekActivity : AppCompatActivity() {
             }
         }
 
-        //Save button TODO THIS IS A MESS
+        //Save button
         ui.floatingActionButton.setOnClickListener {
 
             //Update local data

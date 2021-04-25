@@ -164,7 +164,6 @@ class StudentActivity : AppCompatActivity() {
         override fun onBindViewHolder(holder: StudentActivity.MarkHolder, position: Int) {
             val mark = marks[position]
             holder.listViewUI.txtNumber.text = "Week " + mark.week.toString()
-            //TODO Change mark display based on marking_type
             val filteredWeekList: List<Week> = weeks.filter { it.number == mark.week }
             val funClass = TabbedActivity()
             holder.listViewUI.txtMarkingType.text = funClass.calculateMark(filteredWeekList[0].marking_type.toString(), mark.mark?.toInt()!!)
