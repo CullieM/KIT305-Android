@@ -53,8 +53,6 @@ class WeekActivity : AppCompatActivity() {
                 }
         ui.myList.adapter = MarkAdapter(weekMarks)
         ui.myList.layoutManager = LinearLayoutManager(this)
-
-        //TODO Change mark display based on marking_type
         ui.txtMarkingType.text = weekObject.marking_type
         ui.txtClassAverageHeading.text = "Average"
 

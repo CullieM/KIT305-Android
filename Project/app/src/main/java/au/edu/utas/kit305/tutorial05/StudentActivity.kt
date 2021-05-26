@@ -79,7 +79,6 @@ class StudentActivity : AppCompatActivity() {
         //Clear global variable marks as information may retain from other students.
         //Marks is global for simplicity between StudentActivity and EditStudentActivity.
         marks.clear()
-
         //Retrieve marks for the relevant student for each week.
         val db = Firebase.firestore
         for (i in 0 until weeks.size) {

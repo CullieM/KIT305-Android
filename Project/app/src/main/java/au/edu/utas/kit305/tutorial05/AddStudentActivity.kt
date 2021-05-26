@@ -79,7 +79,6 @@ class AddStudentActivity : AppCompatActivity() {
                     finish()
                 }
             //Add a Firebase storage image for the new student.
-
             //Path to store image.
             val studentPictureRef : StorageReference = FirebaseStorage.getInstance().reference.child("studentPictures/" + ui.editStudentID.text + ".jpg")
             //Taken from https://firebase.google.com/docs/storage/android/upload-files#upload_from_data_in_memory
