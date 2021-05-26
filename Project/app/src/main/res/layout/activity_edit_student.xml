@@ -6,29 +6,30 @@
     android:layout_height="match_parent"
     tools:context=".StudentActivity">
 
-    <TextView
+    <EditText
         android:id="@+id/txtStudentName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="28dp"
         android:text="TextView"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
+    <EditText
         android:id="@+id/txtStudentID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
+        android:inputType="number"
         app:layout_constraintStart_toStartOf="@+id/txtStudentName"
         app:layout_constraintTop_toBottomOf="@+id/txtStudentName"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />>
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btnEdit"
+        android:id="@+id/btnSave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="40dp"
@@ -37,34 +38,12 @@
         android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@android:drawable/ic_menu_edit" />
-
-    <TextView
-        android:id="@+id/txtOverallMark"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
-        android:layout_marginBottom="48dp"
-        android:text="TextView"
-
-        app:layout_constraintBottom_toTopOf="@+id/btnShare"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
-        android:id="@+id/average"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        android:text="TextView"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:layout_constraintBottom_toTopOf="@+id/txtOverallMark"
-        app:layout_constraintEnd_toEndOf="@+id/txtOverallMark" />
+        app:srcCompat="@android:drawable/ic_menu_save" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/myList"
         android:layout_width="174dp"
-        android:layout_height="421dp"
+        android:layout_height="359dp"
         android:layout_marginTop="36dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.086"
@@ -76,19 +55,31 @@
         android:layout_width="500px"
         android:layout_height="500px"
         android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="@+id/average"
         app:layout_constraintStart_toEndOf="@+id/myList"
         app:layout_constraintTop_toTopOf="@+id/txtStudentName"
         tools:srcCompat="@tools:sample/avatars" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btnShare"
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="35dp"
+        android:layout_height="42dp"
+        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:srcCompat="@android:drawable/ic_menu_camera" />
+
+    <Button
+        android:id="@+id/btnDeleteStudent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
-        android:clickable="true"
-        app:layout_constraintBottom_toTopOf="@+id/btnEdit"
-        app:layout_constraintEnd_toEndOf="@+id/btnEdit"
-        app:srcCompat="?attr/actionModeShareDrawable" />
+        android:layout_marginBottom="24dp"
+        android:backgroundTint="#B33A3A"
+        android:text="Delete Student"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/myList"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/myList"
+        app:layout_constraintTop_toBottomOf="@+id/myList"
+        app:layout_constraintVertical_bias="0.678" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
