@@ -4,9 +4,8 @@ import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import au.edu.utas.kit305.tutorial05.R
-import au.edu.utas.kit305.tutorial05.StudentFragment
-import au.edu.utas.kit305.tutorial05.WeeksFragment
+import au.edu.utas.kit305.tutorial05.StudentListFragment
+import au.edu.utas.kit305.tutorial05.WeeksListFragment
 
 private val TAB_TITLES= arrayOf(
     "Students",
@@ -24,9 +23,9 @@ class SectionsPagerAdapter(private val context: Context, fm: FragmentManager) :
         // Return a PlaceholderFragment (defined as a static inner class below).
         return when (position)
         {
-            0 -> StudentFragment()
-            1 -> WeeksFragment()
-            else -> StudentFragment()
+            0 -> StudentListFragment()
+            1 -> WeeksListFragment()
+            else -> StudentListFragment()
         }
     }
 
